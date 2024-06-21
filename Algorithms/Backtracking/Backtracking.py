@@ -1,11 +1,11 @@
-def backtrack(s, candidates):
+def backtrack(s, options):
     if is_s(s):
         process_s(s)
     else:
-        for candidate in candidates:
-            s.append(candidate)
+        for option in options:
+            s.append(option)
             if is_valid(s):
-                backtrack(s, candidates)
+                backtrack(s, options)
             s.pop()
 
 # s = solution
