@@ -7,3 +7,15 @@
 #candies among all the kids, or false otherwise.
 
 # Note that multiple kids can have the greatest number of candies.
+
+class Solution:
+    def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
+        n = len(candies)
+        maximum = max(candies)
+        result = []
+        for i in range(n):
+            if candies[i] + extraCandies >= maximum:
+                result.append(True)
+            else:
+                result.append(False)
+        return result
