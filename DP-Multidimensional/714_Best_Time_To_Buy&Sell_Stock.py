@@ -9,3 +9,14 @@
 # You may not engage in multiple transactions simultaneously (i.e., you must
 # sell the stock before you buy again). The transaction fee is only charged once
 # for each stock purchase and sale.
+
+class Solution:
+    def maxProfit(self, prices: List[int], fee: int) -> int:
+        buy = float('-inf')
+        sell = 0
+
+        for price in prices:
+            buy = max(buy, sell - price)
+            sell = max(sell, buy + price - fee)
+
+        return sell
