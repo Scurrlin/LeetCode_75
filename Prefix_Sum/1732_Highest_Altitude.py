@@ -6,3 +6,13 @@
 # in altitude between points i​​​​​​ and i + 1 for all (0 <= i < n). Return the
 # highest altitude of a point.
 
+class Solution:
+    def largestAltitude(self, gain: List[int]) -> int:
+        maxAltitude = 0
+        currAltitude = 0
+
+        for change in gain:
+            currAltitude += change
+            maxAltitude = max(maxAltitude, currAltitude)
+        
+        return maxAltitude
