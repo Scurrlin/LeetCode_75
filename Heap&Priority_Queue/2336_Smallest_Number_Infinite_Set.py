@@ -7,3 +7,21 @@
 # integer contained in the infinite set. void addBack(int num) Adds a positive
 # integer num back into the infinite set, if it is not already in the infinite
 # set.
+
+class SmallestInfiniteSet:
+    def __init__(self):
+        self.cur = 1
+        self.s = set()
+
+    def popSmallest(self):
+        if self.s:
+            res = min(self.s)
+            self.s.remove(res)
+            return res
+        else:
+            self.cur += 1
+            return self.cur - 1
+
+    def addBack(self, num):
+        if self.cur > num:
+            self.s.add(num) 
