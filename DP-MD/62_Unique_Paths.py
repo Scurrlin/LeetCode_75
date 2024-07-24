@@ -19,5 +19,3 @@ class Solution:
                 newRow[j] = newRow[j + 1] + row[j]
             row = newRow
         return row[0]
-
-        # O(n * m) O(n)
