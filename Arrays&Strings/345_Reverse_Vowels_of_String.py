@@ -5,18 +5,18 @@
 
 class Solution:
     def reverseVowels(self, s: str) -> str:
-        vowels = set('aeiouAEIOU')
+        v = set('aeiouAEIOU')
         s = list(s)
-        left, right = 0, len(s) - 1
+        l, r = 0, len(s) - 1
 
-        while left < right:
-            if s[left] not in vowels:
-                left += 1
-            elif s[right] not in vowels:
-                right -= 1
+        while l < r:
+            if s[l] not in v:
+                l += 1
+            elif s[r] not in v:
+                r -= 1
             else:
-                s[left], s[right] = s[right], s[left]
-                left += 1
-                right -= 1
+                s[l], s[r] = s[r], s[l]
+                l += 1
+                r -= 1
 
         return ''.join(s)
