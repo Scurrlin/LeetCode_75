@@ -14,11 +14,12 @@ class Solution:
                 if n == 0:
                     ans.append(curr.copy())
                 return
-            for dig in range(i, 10):
-                curr.append(dig)
-                backtrack(curr, n - dig, dig + 1)
+            for d in range(i, 10):
+                curr.append(d)
+                backtrack(curr, n - d, d + 1)
                 curr.pop()
         backtrack([], n, 1)
         return ans
 
 # curr = current
+# d = digit
