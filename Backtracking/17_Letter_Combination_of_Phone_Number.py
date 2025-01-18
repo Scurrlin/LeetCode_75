@@ -8,6 +8,7 @@
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         res = []
+        d = digits
         digitToChar = {
             "2": "abc",
             "3": "def",
@@ -20,13 +21,13 @@ class Solution:
         }
 
         def backtrack(i, curStr):
-            if len(curStr) == len(digits):
+            if len(curStr) == len(d):
                 res.append(curStr)
                 return
-            for c in digitToChar[digits[i]]:
+            for c in digitToChar[d[i]]:
                 backtrack(i + 1, curStr + c)
 
-        if digits:
+        if d:
             backtrack(0, "")
 
         return res
