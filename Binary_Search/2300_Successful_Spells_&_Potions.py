@@ -11,19 +11,20 @@
 class Solution:
     def successfulPairs(self, spells: List[int], potions: List[int], success: int) -> List[int]:
         pairs = []
-        potions.sort()
-        n = len(potions)
+        s, p = spells, potions
+        p.sort()
+        n = len(p)
 
-        for i in range(len(spells)):
-            l, r = 0, len(potions) - 1
+        for i in range(len(s)):
+            l, r = 0, len(p) - 1
             
             while l <= r:
                 m = (l + r) // 2
-                if spells[i] * potions[m] >= success:
+                if s[i] * p[m] >= success:
                     r = m - 1
                 else:
                     l = m + 1
-            if l < len(potions):
+            if l < len(p):
                 pairs.append(n - l)
             else:
                 pairs.append(0)
