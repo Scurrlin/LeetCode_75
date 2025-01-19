@@ -7,19 +7,19 @@
 # Return true if and only if the two given trees with head nodes root1 and root2
 # are leaf-similar.
 
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-
 class Solution:
     def leafSimilar(self, root1: TreeNode, root2: TreeNode) -> bool:
-        def collect_leaf_values(root: TreeNode) -> str:
+        def collect_leaf_values(root: TreeNode, leaf_values: list[int]) -> None:
             if not root:
-                return ''
+                return
             if not root.left and not root.right:
-                return str(root.val)
-            return collect_leaf_values(root.left) + collect_leaf_values(root.right)
+                leaf_values.append(root.val)
+            collect_leaf_values(root.left, leaf_values)
+            collect_leaf_values(root.right, leaf_values)
         
-        return collect_leaf_values(root1) == collect_leaf_values(root2)
+        leaf_values1 = []
+        leaf_values2 = []
+        collect_leaf_values(root1, leaf_values1)
+        collect_leaf_values(root2, leaf_values2)
+        
+        return leaf_values1 == leaf_values2
