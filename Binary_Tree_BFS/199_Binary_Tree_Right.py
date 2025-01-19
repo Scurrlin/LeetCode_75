@@ -2,20 +2,18 @@
 # of it, return the values of the nodes you can see ordered from top to bottom.
 
 class Solution:
-    def rightSideView(self, root: TreeNode) -> List[int]:
-        res = []
-        q = collections.deque([root])
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        v = []
+        def dfs(node, level):
+            if node:
+                if level == len(v):
+                    v.append(node.val)
+                dfs(node.right, level + 1)
+                dfs(node.left, level + 1)
+                
+        dfs(root, 0)
+        return v
 
-        while q:
-            rightSide = None
-            qLen = len(q)
-
-            for i in range(qLen):
-                node = q.popleft()
-                if node:
-                    rightSide = node
-                    q.append(node.left)
-                    q.append(node.right)
-            if rightSide:
-                res.append(rightSide.val)
-        return res
+# v = view
