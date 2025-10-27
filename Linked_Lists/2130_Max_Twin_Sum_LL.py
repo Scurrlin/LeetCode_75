@@ -11,18 +11,16 @@
 
 class Solution:
     def pairSum(self, head: Optional[ListNode]) -> int:
-        slow, fast = head, head
-        prev = None
-        while fast and fast.next:
-            fast = fast.next.next
-            tmp = slow.next
-            slow.next = prev
-            prev = slow
-            slow = tmp
-
-        res = 0
-        while slow:
-            res = max(res, prev.val + slow.val)
-            prev = prev.next
-            slow = slow.next
-        return res
+        list = []
+        current = head
+        while current:
+            list.append(current.val)
+            current = current.next
+        
+        i, maxSum = 0, 0
+        while i < (len(list) // 2):
+            currSum = list[i] + list[-(i + 1)]
+            if currSum > maxSum:
+                maxSum = currSum
+            i += 1
+        return maxSum
