@@ -1,4 +1,5 @@
-def backtrack(s, options):
+def backtrack(solution, options):
+    s = solution
     if is_s(s):
         process_s(s)
     else:
@@ -7,5 +8,3 @@ def backtrack(s, options):
             if is_valid(s):
                 backtrack(s, options)
             s.pop()
-
-# s = solution

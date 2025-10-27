@@ -1,7 +1,7 @@
 from collections import deque
 
 class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
+    def __init__(self, val = 0, left = None, right = None):
         self.val = val
         self.left = left
         self.right = right
@@ -9,16 +9,16 @@ class TreeNode:
 def bfs_tree(root):
     if not root:
         return []
-    v = set()
-    q = deque([root])
+    visited = set()
+    deq = deque([root])
     result = []
-    while q:
-        node = q.popleft()
-        if node not in v:
-            v.add(node)
+    while deq:
+        node = deq.popleft()
+        if node not in visited:
+            visited.add(node)
             result.append(node.val)
             if node.left:
-                q.append(node.left)
+                deq.append(node.left)
             if node.right:
-                q.append(node.right)
+                deq.append(node.right)
     return result

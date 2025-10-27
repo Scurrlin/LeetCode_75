@@ -1,11 +1,9 @@
 def merge_intervals(intervals):
     intervals.sort(key=lambda x: x[0])
-    m = []
+    merged = []
     for interval in intervals:
-        if not m or m[-1][1] < interval[0]:
-            m.append(interval)
+        if not merged or merged[-1][1] < interval[0]:
+            merged.append(interval)
         else:
-            m[-1][1] = max(m[-1][1], interval[1])
-    return m
-
-# m = merged
+            merged[-1][1] = max(m[-1][1], interval[1])
+    return merged
