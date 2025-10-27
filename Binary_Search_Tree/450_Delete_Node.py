@@ -20,9 +20,9 @@ class Solution:
             elif not root.right:
                 return root.left
             
-            cur = root.right
-            while cur.left:
-                cur = cur.left 
-            root.val = cur.val
+            curr = root.right
+            while curr.left:
+                curr = curr.left 
+            root.val = curr.val
             root.right = self.deleteNode(root.right, root.val)
         return root
