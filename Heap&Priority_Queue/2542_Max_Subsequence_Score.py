@@ -14,13 +14,16 @@
 
 class Solution:
     def maxScore(self, nums1: List[int], nums2: List[int], k: int) -> int:
-        res, prefixSum, minHeap = 0, 0, []
-        
-        for a, b in sorted(list(zip(nums1, nums2)), key=itemgetter(1), reverse=True):
-            prefixSum += a
+        res, preSum, minHeap = 0, 0, []
+        for a, b in sorted(
+            list(zip(nums1, nums2)), 
+            key = itemgetter(1),
+            reverse = True):
+            preSum += a
             heappush(minHeap, a)
+            
             if len(minHeap) == k:
-                res = max(res, prefixSum * b)
-                prefixSum -= heappop(minHeap)                               
+                res = max(res, preSum * b)
+                preSum -= heappop(minHeap)                               
         
         return res
