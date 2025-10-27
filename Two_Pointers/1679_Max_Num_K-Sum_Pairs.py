@@ -8,18 +8,16 @@
 class Solution:
     def maxOperations(self, nums: List[int], k: int) -> int:
         nums.sort()
-        left, right = 0, len(nums) - 1
-        operations = 0
+        l, r, ops = 0, len(nums) - 1, 0
 
-        while left < right:
-            total = nums[left] + nums[right]
+        while l < r:
+            total = nums[l] + nums[r]
             if total == k:
-                operations += 1
-                left += 1
-                right -= 1
+                ops += 1
+                l += 1
+                r -= 1
             elif total < k:
-                left += 1
+                l += 1
             else:
-                right -= 1
-
-        return operations
+                r -= 1
+        return ops
