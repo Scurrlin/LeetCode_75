@@ -7,11 +7,10 @@
 class Solution:
     def pathSum(self, root: TreeNode, targetSum: int) -> int:
         def dfs(node: TreeNode, currentSum: int, target: int, prefixSums: dict[int, int]) -> int:
-            cSum = currentSum
-            pSums = prefixSums
-            
+            cSum, pSums = currentSum, prefixSums
             if not node:
                 return 0
+            
             cSum += node.val
             count = pSums.get(cSum - target, 0)
             pSums[cSum] = pSums.get(cSum, 0) + 1
