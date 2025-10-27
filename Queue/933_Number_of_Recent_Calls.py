@@ -12,7 +12,6 @@
 # previous call.
 
 class RecentCounter:
-
     def __init__(self):
         self.counter = 0
         self.queue = deque()
@@ -24,5 +23,4 @@ class RecentCounter:
         while self.queue[0] < t-3000:
             self.queue.popleft()
             self.counter -=1
-
         return self.counter
