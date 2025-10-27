@@ -14,11 +14,11 @@ class Solution:
                 return
             if not root.left and not root.right:
                 leaf_values.append(root.val)
+
             collect_leaf_values(root.left, leaf_values)
             collect_leaf_values(root.right, leaf_values)
         
-        leaf_values1 = []
-        leaf_values2 = []
+        leaf_values1, leaf_values2 = [], []
         collect_leaf_values(root1, leaf_values1)
         collect_leaf_values(root2, leaf_values2)
         
