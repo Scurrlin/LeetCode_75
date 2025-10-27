@@ -15,52 +15,36 @@
 # Note: The variables that do not occur in the list of equations are undefined,
 # so the answer cannot be determined for them.
 
-from typing import List
+import collections 
 
 class Solution:
-    def dfs(self, node: str, dest: str, gr: dict, vis: set, ans: List[float], temp: float) -> None:
-        if node in vis:
-            return
-
-        vis.add(node)
-        if node == dest:
-            ans[0] = temp
-            return
-
-        for ne, val in gr[node].items():
-            self.dfs(ne, dest, gr, vis, ans, temp * val)
-
-    def buildGraph(self, equations: List[List[str]], values: List[float]) -> dict:
-        gr = {}
-
-        for i in range(len(equations)):
-            dividend, divisor = equations[i]
-            value = values[i]
-
-            if dividend not in gr:
-                gr[dividend] = {}
-            if divisor not in gr:
-                gr[divisor] = {}
-
-            gr[dividend][divisor] = value
-            gr[divisor][dividend] = 1.0 / value
-
-        return gr
-
     def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
-        gr = self.buildGraph(equations, values)
-        finalAns = []
+        graph, res = collections.defaultdict(list), []
+        for equation, value in zip(equations, values):
+            dividend, divisor = equation
+            graph[dividend].append((divisor, value))
+            graph[divisor].append((dividend, 1 / value))
+        
+        def dfs(dividend, divisor, visited, total):
+            if dividend == divisor:
+                return total
+            if dividend not in visited:
+                visited.add(dividend)
 
-        for query in queries:
-            dividend, divisor = query
+                for next_dividend, value in graph[dividend]:
+                    if next_dividend not in visited:
+                        ret = dfs(next_dividend, divisor, visited, total * value)
+                        if ret != -1:
+                            return ret
+                        
+            return -1
 
-            if dividend not in gr or divisor not in gr:
-                finalAns.append(-1.0)
+        for q in queries:
+            dividend, divisor = q[0], q[1]
+            if dividend not in graph or divisor not in graph:
+                res.append(-1)
             else:
-                vis = set()
-                ans = [-1.0]
-                temp = 1.0
-                self.dfs(dividend, divisor, gr, vis, ans, temp)
-                finalAns.append(ans[0])
-
-        return finalAns
+                ret = dfs(dividend, divisor, set(), 1)
+                res.append(ret)
+                
+        return res
