@@ -5,15 +5,14 @@ class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         if not root:
             return []
-        v = []
+        
+        view = []
         def dfs(node, level):
             if node:
-                if level == len(v):
-                    v.append(node.val)
+                if level == len(view):
+                    view.append(node.val)
                 dfs(node.right, level + 1)
                 dfs(node.left, level + 1)
                 
         dfs(root, 0)
-        return v
-
-# v = view
+        return view
