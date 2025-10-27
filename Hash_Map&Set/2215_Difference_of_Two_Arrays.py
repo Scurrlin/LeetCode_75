@@ -11,10 +11,7 @@ from typing import List
 
 class Solution:
     def findDifference(self, nums1: List[int], nums2: List[int]) -> List[List[int]]:
-        nums1_set = set(nums1)
-        nums2_set = set(nums2)
-
-        lst1 = [num for num in nums1_set if num not in nums2_set]
-        lst2 = [num for num in nums2_set if num not in nums1_set]
-
+        set1, set2 = set(nums1), set(nums2)
+        lst1 = [num for num in set1 if num not in set2]
+        lst2 = [num for num in set2 if num not in set2]
         return [lst1, lst2]
