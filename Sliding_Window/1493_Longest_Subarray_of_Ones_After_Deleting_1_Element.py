@@ -5,14 +5,13 @@
 
 class Solution:
     def longestSubarray(self, nums: List[int]) -> int:
-        prevWindow = currWindow = max_length = 0
-
-        for num in nums:
-            if num == 0:
-                max_length = max(max_length, prevWindow + currWindow)
-                prevWindow, currWindow = currWindow, 0
-            else:
-                currWindow += 1
-
-        max_length = max(max_length, prevWindow + currWindow)
-        return max_length if currWindow < len(nums) else currWindow - 1
+        left, zero, count = 0, 0, 1
+        for right in range(len(nums)) :
+            if nums[right] == 0 :
+                count -= 1
+                zero = 1
+            if count < 0 :
+                if nums[left] == 0 :
+                    count += 1
+                left += 1
+        return right - left
