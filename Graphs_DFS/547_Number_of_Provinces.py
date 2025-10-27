@@ -13,25 +13,41 @@
 
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
-        l1 = [0]*len(isConnected[0])
-        for i in range(len(l1)):
-            l1[i] = i
+        n = len(isConnected)
+        visit = [False] * n
         
-        def get_root(x):
-            return l1[x]
+        def dfs(city):
+            visit[city] = True
+            for neighbor in range(n):
+                if isConnected[city][neighbor] == 1 and not visit[neighbor]:
+                    dfs(neighbor)
         
-        def union(x,y):
-            Rx = get_root(x)
-            Ry = get_root(y)
+        provinces = 0
+        for i in range(n):
+            if not visit[i]:
+                provinces += 1
+                dfs(i)
 
-            if(Rx != Ry):
-                for i in range(0,len(l1)):
-                    if l1[i] == Ry:
-                        l1[i] = Rx
+        return provinces
 
-        for i in range(0,len(isConnected)):
-            for j in range(i+1,len(isConnected[0])):
-                if isConnected[i][j] == 1:
-                    union(i,j)
-            
-        return len(set(l1))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        
