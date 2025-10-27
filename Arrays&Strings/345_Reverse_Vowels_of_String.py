@@ -5,14 +5,14 @@
 
 class Solution:
     def reverseVowels(self, s: str) -> str:
-        v = set('aeiouAEIOU')
+        vowels = set('aeiouAEIOU')
         s = list(s)
         l, r = 0, len(s) - 1
 
         while l < r:
-            if s[l] not in v:
+            if s[l] not in vowels:
                 l += 1
-            elif s[r] not in v:
+            elif s[r] not in vowels:
                 r -= 1
             else:
                 s[l], s[r] = s[r], s[l]
