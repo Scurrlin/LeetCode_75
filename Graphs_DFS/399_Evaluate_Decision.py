@@ -45,6 +45,5 @@ class Solution:
                 res.append(-1)
             else:
                 ret = dfs(dividend, divisor, set(), 1)
-                res.append(ret)
-                
+                res.append(ret)        
         return res
