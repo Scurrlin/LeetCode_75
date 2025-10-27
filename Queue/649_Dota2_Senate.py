@@ -21,11 +21,11 @@
 # own party. Predict which party will finally announce the victory and change
 # the Dota2 game. The output should be "Radiant" or "Dire".
 
+from collections import deque
+
 class Solution:
     def predictPartyVictory(self, senate: str) -> str:
-        r_senators = deque()
-        d_senators = deque()
-
+        r_senators, d_senators = deque(), deque()
         for i, s in enumerate(senate):
             if s == 'R':
                 r_senators.append(i)
@@ -35,7 +35,6 @@ class Solution:
         while r_senators and d_senators:
             r_index = r_senators.popleft()
             d_index = d_senators.popleft()
-
             if r_index < d_index:
                 r_senators.append(r_index + len(senate))
             else:
