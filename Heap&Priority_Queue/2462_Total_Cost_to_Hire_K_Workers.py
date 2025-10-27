@@ -16,32 +16,25 @@
 # the worker with the lowest cost among them. Break the tie by the smallest
 # index. A worker can only be chosen once. Return the total cost to hire exactly
 # k workers.
-
+    
 class Solution:
-    def totalCost(self, costs, k, candidates):
-        i = 0
-        j = len(costs) - 1
-        pq1 = []
-        pq2 = []
-
-        ans = 0
-        while k > 0:
-            while len(pq1) < candidates and i <= j:
-                heapq.heappush(pq1, costs[i])
+    def totalCost(self, costs: List[int], k: int, candidates: int) -> int:
+        if candidates * 2 + k > len(costs):
+            return sum(sorted(costs)[:k])
+        pre = costs[:candidates]
+        suf = costs[-candidates:]
+        heapify(pre)
+        heapify(suf)
+        
+        res = 0
+        i = candidates
+        j = len(costs) - 1 - candidates
+        for _ in range(k):
+            if pre[0] <= suf[0]:
+                res += heapreplace(pre, costs[i])
                 i += 1
-            while len(pq2) < candidates and i <= j:
-                heapq.heappush(pq2, costs[j])
-                j -= 1
-
-            t1 = pq1[0] if pq1 else float('inf')
-            t2 = pq2[0] if pq2 else float('inf')
-
-            if t1 <= t2:
-                ans += t1
-                heapq.heappop(pq1)
             else:
-                ans += t2
-                heapq.heappop(pq2)
-
-            k -= 1
-        return ans
+                res += heapreplace(suf, costs[j])
+                j -= 1
+        
+        return res
