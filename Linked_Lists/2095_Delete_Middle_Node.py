@@ -7,18 +7,17 @@
 
 # For n = 1, 2, 3, 4, and 5, the middle nodes are 0, 1, 1, 2, and 2,
 # respectively.
+    
+class Solution:
+    def deleteMiddle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head == None or head.next == None:
+            return None
+        slow = head
+        fast = head.next.next
 
-class Solution(object):
-    def deleteMiddle(self, head):
-
-        if head == None :return None
-        prev = ListNode(0)
-        prev.next = head
-        slow = prev
-        fast = head
-        while fast != None and fast.next != None:
+        while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
         
         slow.next = slow.next.next
-        return prev.next
+        return head
