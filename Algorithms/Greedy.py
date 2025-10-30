@@ -1,5 +1,5 @@
 def activity_selection(activities):
-    activities.sort(key=lambda x: x[1])
+    activities.sort(key = lambda x:x[1])
     selected = []
     last_end_time = 0
     for start, end in activities:

@@ -13,7 +13,7 @@ def max_sliding_window(nums, k):
             result.append(nums[deq[0]])
     return result
 
-def max_subarr_sum(arr, k):
+def max_subarry_sum(arr, k):
     if len(arr) < k:
         return -1
     max_sum = curr_sum = sum(arr[:k])

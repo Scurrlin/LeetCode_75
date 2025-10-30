@@ -4,6 +4,7 @@ def merge_sort(arr):
         L, R = arr[:mid], arr[mid:]
         merge_sort(L)
         merge_sort(R)
+
         i = j = k = 0       
         while i < len(L) and j < len(R):
             if L[i] < R[j]:
@@ -13,6 +14,7 @@ def merge_sort(arr):
                 arr[k] = R[j]
                 j += 1
             k += 1
+        
         while i < len(L):
             arr[k] = L[i]
             i += 1
